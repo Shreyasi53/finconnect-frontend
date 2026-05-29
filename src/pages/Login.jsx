@@ -2,8 +2,10 @@ import { useState } from "react";
 import API from "../api/axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -22,7 +24,7 @@ function Login() {
     try {
       setLoading(true);
       const res = await API.post("/v1/auth/login", formData);
-      localStorage.setItem("token", res.data.accessToken);
+      login(res.data.accessToken);
       toast.success(res.data.message);
       navigate("/");
     } catch (error) {
