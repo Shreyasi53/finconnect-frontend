@@ -1,24 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import API from "../api/axios";
 
 function Test() {
+  const [blogs, setBlogs] = useState([]);
+
   useEffect(() => {
     const fetchBlogs = async () => {
-      try {
-        const res = await API.get("/blogs");
-        console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
+      const res = await API.get("/v1/blogs");
+      setBlogs(res.data.blogs);
     };
 
     fetchBlogs();
-
   }, []);
 
   return (
     <div>
-      Backend Connected
+      <h1>Blogs</h1>
+
+      {blogs.map((blog) => (
+        <div key={blog._id}>
+          <h2>{blog.title}</h2>
+        </div>
+      ))}
     </div>
   );
 }
