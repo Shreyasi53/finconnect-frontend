@@ -1,21 +1,9 @@
-import { useAuth } from "../context/AuthContext";
-
-function Home() {
-  const { user } = useAuth();
-
-  return (
+function Home(){
+  return(
     <div>
-      <h1>Home</h1>
-
-      {user && (
-        <>
-          <h2>{user.fullname}</h2>
-          <h2>{user.email}</h2>
-          <h2>{user.role}</h2>
-        </>
-      )}
+      <h1>Welcome to FinConnect</h1>
+      <p>Connect with financial advisors and manage your finances</p>
     </div>
-  );
+  )
 }
-
 export default Home;
