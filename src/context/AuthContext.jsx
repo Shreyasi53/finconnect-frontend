@@ -20,19 +20,19 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const getCurrentUser = async () => {
+    const fetchCurrentUser = async () => {
       try {
         if (!token) return;
 
         const res = await API.get("/v1/users/current-user");
-
+        console.log(res.data);
         setUser(res.data.user);
       } catch (error) {
         console.log(error);
       }
     };
 
-    getCurrentUser();
+    fetchCurrentUser();
   }, [token]);
 
   return (
